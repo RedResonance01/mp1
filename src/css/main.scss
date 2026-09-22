@@ -1,1 +1,642 @@
-/* Your SCSS here. */
+// ---------------------------------------------------------------------------
+// Variables
+// ---------------------------------------------------------------------------
+$color-bg: #ffffff;
+$color-text: hsl(213, 93%, 11%);
+$color-primary: hsl(213, 93%, 24%);
+$color-primary-dark: hsl(213, 93%, 14%);
+$color-accent: hsl(187, 72%, 42%);
+$color-nav-bg: whitesmoke;
+$color-border: rgba(0, 0, 0, 0.1);
+
+$font-heading: 'Merriweather', 'Times New Roman', Times, serif;
+$font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$font-nav: 'Montserrat', sans-serif;
+
+$nav-height-large: 110px;
+$nav-height-small: 64px;
+
+$max-width: 1500px;
+
+$bp-tablet: 1024px;
+$bp-mobile: 768px;
+
+$transition-fast: 0.2s ease;
+$transition-medium: 0.4s ease;
+
+// ---------------------------------------------------------------------------
+// Mixins
+// ---------------------------------------------------------------------------
+@mixin flex-center($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin respond($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin section-base {
+  width: 100%;
+  padding: 4rem 6vw;
+  box-sizing: border-box;
+
+  @include respond($bp-mobile) {
+    padding: 2.5rem 5vw;
+  }
+}
+
+@mixin card-shadow {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+// ---------------------------------------------------------------------------
+// Global
+// ---------------------------------------------------------------------------
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  max-width: $max-width;
+  min-width: 320px;
+  margin-inline: auto;
+  background-color: $color-bg;
+  color: $color-text;
+  font-family: $font-body;
+}
+
+h1,
+h2,
+h3 {
+  font-family: $font-heading;
+  color: $color-text;
+  margin: 0 0 0.5em;
+}
+
+.section-heading {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: $color-accent;
+    margin: 0.6em auto 0;
+  }
+
+  &--light {
+    color: $color-bg;
+
+    &::after {
+      background-color: $color-bg;
+    }
+  }
+}
+
+section {
+  scroll-margin-top: $nav-height-small;
+}
+
+// ---------------------------------------------------------------------------
+// Navbar
+// ---------------------------------------------------------------------------
+.nav-bar-container {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: $color-nav-bg;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: padding $transition-medium;
+  padding: 0.5rem 0;
+
+  &.scrolled {
+    padding: 0;
+
+    .title-box {
+      .page-title {
+        font-size: 1.4rem;
+      }
+
+      .page-subtitle {
+        font-size: 0.7rem;
+        opacity: 0;
+        max-height: 0;
+      }
+    }
+
+    .nav-menu ul {
+      height: $nav-height-small;
+    }
+  }
+}
+
+.title-box {
+  margin: 0;
+  padding-left: 1.5rem;
+
+  .page-title {
+    font-size: 2.2rem;
+    transition: font-size $transition-medium;
+    margin: 0;
+  }
+
+  .page-subtitle {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    font-weight: normal;
+    margin: 0;
+    opacity: 1;
+    max-height: 2em;
+    overflow: hidden;
+    transition: opacity $transition-fast, max-height $transition-medium;
+  }
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  ul {
+    height: $nav-height-large;
+    list-style: none;
+    margin: 0;
+    padding: 0 1.5rem 0 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    transition: height $transition-medium;
+  }
+
+  a {
+    height: 100%;
+    padding: 0 1.4rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: $color-text;
+    font-family: $font-nav;
+    font-weight: 600;
+    border-bottom: 3px solid transparent;
+    transition: background-color $transition-fast, border-color $transition-fast;
+
+    &:hover {
+      background-color: darken($color-nav-bg, 5%);
+    }
+
+    &.active {
+      border-bottom-color: $color-accent;
+      color: $color-accent;
+    }
+  }
+
+  @include respond($bp-mobile) {
+    a {
+      padding: 0 0.7rem;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Hero / Background image section
+// ---------------------------------------------------------------------------
+.hero-section {
+  @include flex-center;
+  min-height: 90vh;
+  width: 100%;
+  padding: 4rem 6vw;
+  box-sizing: border-box;
+
+  background-image: linear-gradient(rgba(3, 15, 33, 0.65), rgba(3, 15, 33, 0.65)), url('../assets/background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
+  @include respond($bp-mobile) {
+    background-attachment: scroll;
+    min-height: 70vh;
+  }
+}
+
+.hero-content {
+  max-width: 760px;
+  text-align: center;
+  color: $color-bg;
+  animation: fadeInUp 1s ease both;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  color: $color-bg;
+  letter-spacing: 0.05em;
+
+  @include respond($bp-mobile) {
+    font-size: 2.4rem;
+  }
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  font-weight: normal;
+  font-family: $font-nav;
+  color: $color-bg;
+  margin-bottom: 1.2em;
+
+  @include respond($bp-mobile) {
+    font-size: 1rem;
+  }
+}
+
+.hero-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1.8em;
+}
+
+.btn-learn-more {
+  @include flex-center;
+  gap: 0.5em;
+  margin: 0 auto;
+  padding: 0.75em 1.6em;
+  background-color: $color-accent;
+  color: $color-bg;
+  border: none;
+  border-radius: 30px;
+  font-family: $font-nav;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color $transition-fast, transform $transition-fast;
+
+  &:hover {
+    background-color: darken($color-accent, 10%);
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Simulation section
+// ---------------------------------------------------------------------------
+.simulation-section {
+  @include section-base;
+  @include flex-center(column);
+  background-color: $color-bg;
+}
+
+.parameter-control,
+.experiment-control {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+.parameter-button,
+.experiment-button {
+  padding: 0.7em 1.4em;
+  border: 2px solid $color-primary;
+  border-radius: 6px;
+  background-color: $color-bg;
+  color: $color-primary;
+  font-family: $font-nav;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-bg;
+  }
+}
+
+.experiment-button {
+  border-color: $color-accent;
+  color: $color-accent;
+
+  &:hover {
+    background-color: $color-accent;
+    color: $color-bg;
+  }
+}
+
+.display-panel {
+  @include flex-center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1100px;
+  min-height: 220px;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: $color-nav-bg;
+  border-radius: 10px;
+  @include card-shadow;
+
+  canvas {
+    max-width: 100%;
+    background-color: $color-bg;
+    border: 1px solid $color-border;
+    border-radius: 6px;
+  }
+
+  &--stats {
+    margin-bottom: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Process section / Carousel
+// ---------------------------------------------------------------------------
+.process-section {
+  @include section-base;
+  @include flex-center(column);
+  background-color: $color-nav-bg;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+.carousel-arrow {
+  @include flex-center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background-color: $color-primary;
+  color: $color-bg;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color $transition-fast, transform $transition-fast;
+
+  &:hover {
+    background-color: $color-primary-dark;
+    transform: scale(1.08);
+  }
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  flex: 1 1 auto;
+}
+
+.carousel-track {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transition: transform $transition-medium;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  text-align: center;
+  padding: 1rem 2.5rem;
+  box-sizing: border-box;
+}
+
+.carousel-icon {
+  font-size: 2.2rem;
+  color: $color-accent;
+  margin-bottom: 0.6em;
+}
+
+.carousel-dots {
+  @include flex-center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: darken($color-nav-bg, 20%);
+    cursor: pointer;
+    transition: background-color $transition-fast;
+
+    &.active {
+      background-color: $color-accent;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Video section
+// ---------------------------------------------------------------------------
+.video-section {
+  @include section-base;
+  @include flex-center(column);
+  background-color: $color-primary;
+}
+
+.video-wrapper {
+  @include flex-center(column);
+  width: 100%;
+  max-width: 800px;
+
+  video {
+    width: 100%;
+    border-radius: 10px;
+    @include card-shadow;
+  }
+}
+
+.video-caption {
+  color: $color-bg;
+  opacity: 0.75;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+// ---------------------------------------------------------------------------
+// Resource section / Multi-column
+// ---------------------------------------------------------------------------
+.resource-section {
+  @include section-base;
+  @include flex-center(column);
+  background-color: $color-bg;
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+
+  @include respond($bp-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond($bp-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.resource-card {
+  display: block;
+  padding: 2rem 1.5rem;
+  background-color: $color-nav-bg;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: $color-text;
+  transition: transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    transform: translateY(-4px);
+    @include card-shadow;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.5em;
+  }
+
+  p {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.65);
+  }
+}
+
+.resource-icon {
+  font-size: 2rem;
+  color: $color-accent;
+  margin-bottom: 0.6em;
+}
+
+// ---------------------------------------------------------------------------
+// Footer
+// ---------------------------------------------------------------------------
+.site-footer {
+  width: 100%;
+  background-color: $color-primary-dark;
+  color: $color-bg;
+  padding: 2rem 6vw;
+  box-sizing: border-box;
+}
+
+.footer-content {
+  @include flex-center(column);
+  gap: 1rem;
+  text-align: center;
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.85;
+  }
+}
+
+.social-icons {
+  display: flex;
+  gap: 1.2rem;
+
+  a {
+    color: $color-bg;
+    font-size: 1.4rem;
+    transition: color $transition-fast, transform $transition-fast;
+
+    &:hover {
+      color: $color-accent;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Modal
+// ---------------------------------------------------------------------------
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.55);
+  @include flex-center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity $transition-medium, visibility $transition-medium;
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.modal {
+  position: relative;
+  width: min(600px, 90vw);
+  max-height: 80vh;
+  overflow-y: auto;
+  background-color: $color-bg;
+  border-radius: 10px;
+  padding: 2.5rem;
+  box-sizing: border-box;
+  @include card-shadow;
+  transform: translateY(-20px);
+  transition: transform $transition-medium;
+
+  .open & {
+    transform: translateY(0);
+  }
+
+  p {
+    line-height: 1.7;
+    margin-bottom: 1em;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: $color-text;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-accent;
+  }
+}

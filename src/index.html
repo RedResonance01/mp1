@@ -1,13 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MP1</title>
-    </head>
-    <body>
-        <h1>Hello World! Welcome to MP1!</h1>
-        <img src="assets/image.jpg">
-    </body>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darwin.1 &mdash; Recognition Automaton Simulation</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+<header class="nav-bar-container">
+    <nav class="nav-menu">
+        <div class="title-box">
+            <h1 class="page-title">Darwin.1</h1>
+            <h2 class="page-subtitle">Recognition Automaton Simulation</h2>
+        </div>
+        <ul>
+            <li><a href="#home" class="links">Home</a></li>
+            <li><a href="#simulation" class="links">Simulation</a></li>
+            <li><a href="#process" class="links">How It Works</a></li>
+            <li><a href="#video" class="links">Video</a></li>
+            <li><a href="#resource" class="links">Resources</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Darwin.1</h1>
+            <h2 class="hero-subtitle">A Recognition Automaton, After Edelman</h2>
+            <p class="hero-text">
+                This page is intended to be a student implementation of "Darwin I," a non-instructionist recognition automaton
+                described by Gerald Edelman in Chapter 3 of <i>Neural Darwinism</i>. As opposed to supervised or self-supervised learning systems,
+                the automaton relies on neither explicit instruction nor prior knowledge of the incoming stimuli in order to recognize them.
+                The system has yet been implemented due to time constraint.
+                The actual simulation will be implemented in the coming few days.
+            </p>
+            <button class="btn-learn-more" id="learn-more-btn" type="button">
+                <i class="fa-solid fa-circle-info"></i> Learn More
+            </button>
+        </div>
+    </section>
+
+    <section class="simulation-section" id="simulation">
+        <h2 class="section-heading">Run the Simulation</h2>
+
+        <div class="parameter-control">
+            <button class="parameter-button" id="pr-param">Set Repertoire</button>
+            <button class="parameter-button" id="st-param">Set Stimuli</button>
+            <button class="parameter-button" id="exp-param">Set Experiment</button>
+            <button class="parameter-button" id="stat">Statistics</button>
+        </div>
+
+        <div class="display-panel">
+            <canvas id="experiment-display"></canvas>
+            <canvas id="parameter-display"></canvas>
+        </div>
+
+        <div class="experiment-control">
+            <button class="experiment-button" id="pr-update">Update Repertoire</button>
+            <button class="experiment-button" id="st-update">Update Stimuli</button>
+            <button class="experiment-button" id="stat-update">Update Statistics</button>
+            <button class="experiment-button" id="advance_n_iter">Advance N Iteration</button>
+        </div>
+
+        <div class="display-panel display-panel--stats">
+            <canvas id="statistical-display"></canvas>
+        </div>
+    </section>
+
+    <section class="process-section" id="process">
+        <h2 class="section-heading">How Darwin I Works</h2>
+
+        <div class="carousel">
+            <button class="carousel-arrow carousel-arrow--prev" id="carousel-prev" type="button" aria-label="Previous slide">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <div class="carousel-viewport">
+                <ul class="carousel-track" id="carousel-track">
+                    <li class="carousel-slide">
+                        <i class="fa-solid fa-diagram-project carousel-icon"></i>
+                        <h3>1. The Primary Repertoire</h3>
+                        <p>
+                            A large pool of recognizer elements with a high degree of variation, here implemented as
+                            randomly generated bit strings, whose number, length and randomness are customizable.
+                            The design of the primary repertoire supposes no prior knowledge of the incoming stimuli.
+                        </p>
+                    </li>
+                    <li class="carousel-slide">
+                        <i class="fa-solid fa-wave-square carousel-icon"></i>
+                        <h3>2. Differential Amplification of the More Adapted</h3>
+                        <p>
+                            Elements within the primary repertoire whose degree of match with a stimulus exceeds some thresholds
+                            are amplified selectively by increasing their numbers and ratio within the primary repertoire. At the
+                            population level, this leads to a secondary repertoire whose responses towards experienced stimuli would be much stronger
+                            compared to the primary repertoire.
+                        </p>
+                    </li>
+                    <li class="carousel-slide">
+                        <i class="fa-solid fa-arrow-up-right-dots carousel-icon"></i>
+                        <h3>3. Degeneracy Preserves Adaptive Potential</h3>
+                        <p>
+                            Functional degeneracy and continuous sources of variation amongst repertoire elements ensures that
+                            the probability of recognizing novel stimuli patterns would always be positive, assuring adaptive potential
+                            of the system.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            <button class="carousel-arrow carousel-arrow--next" id="carousel-next" type="button" aria-label="Next slide">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="carousel-dots" id="carousel-dots"></div>
+    </section>
+
+    <section class="video-section" id="video">
+        <h2 class="section-heading section-heading--light">Placeholder Video</h2>
+        <div class="video-wrapper">
+            <video controls preload="metadata">
+                <source src="assets/music.mp4" type="video/mp4">
+                Your browser does not support the HTML5 video tag.
+            </video>
+            <p class="video-caption">
+                Placeholder media &mdash; will be replaced with an actual simulation walkthrough. For now, enjoy this music
+            </p>
+        </div>
+    </section>
+
+    <section class="resource-section" id="resource">
+        <h2 class="section-heading">Further Reading</h2>
+        <div class="resource-grid">
+            <a class="resource-card" href="https://books.google.com/books?id=hOdqAAAAMAAJ&q=neural+darwinism&dq=neural+darwinism&hl=en&newbks=1&newbks_redir=1&printsec=frontcover&sa=X&ved=2ahUKEwjV-uvRl4GXAxVDmisGHREEEKcQ6AF6BAgPEAM" target="_blank" rel="noopener noreferrer">
+                <i class="fa-solid fa-book resource-icon"></i>
+                <h3>Neural Darwinism</h3>
+                <p>Gerald M. Edelman's original book laying out the Theory of Neuronal Group Selection, including the Darwin I automaton in Chapter 3.</p>
+            </a>
+            <a class="resource-card" href="https://en.wikipedia.org/wiki/Neural_Darwinism" target="_blank" rel="noopener noreferrer">
+                <i class="fa-solid fa-globe resource-icon"></i>
+                <h3>Neural Darwinism (Wikipedia)</h3>
+                <p>A concise overview of the theory of neuronal group selection and its core concepts: variation, selection, and reentry.</p>
+            </a>
+            <a class="resource-card" href="https://en.wikipedia.org/wiki/Gerald_Edelman" target="_blank" rel="noopener noreferrer">
+                <i class="fa-solid fa-user-graduate resource-icon"></i>
+                <h3>Gerald Edelman</h3>
+                <p>Background on the Nobel laureate immunologist and neuroscientist behind the theory this simulation is based on.</p>
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer" id="footer">
+    <div class="footer-content">
+        <p>CS 409 MP1</p>
+        <div class="social-icons">
+            <a href="https://github.com/RedResonance01" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+    </div>
+</footer>
+
+<div class="modal-overlay" id="info-modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+        <button class="modal-close" id="info-modal-close" type="button" aria-label="Close">&times;</button>
+        <h2 id="info-modal-title">About This Simulation</h2>
+        <p>
+            In 1978, Gerald Edelman proposed the Theory of Neuronal Group Selection (labeled
+            "Neural Darwinism"), arguing that the brain adapts through a selectional process akin
+            to natural selection, rather than through explicit, instructive programming. "Darwin I,"
+            presented in Chapter 3 of his 1987 book <i>Neural Darwinism</i>, is a minimal computer
+            automaton built to demonstrate the idea: a repertoire of variously-connected recognizer
+            units is exposed to binary stimulus patterns, units that respond well are reinforced, and
+            over many iterations the repertoire becomes tuned to "recognize" recurring patterns
+            &mdash; without ever being told what those patterns are in advance.
+        </p>
+        <p>
+            This page implements a small interactive recreation of that experiment. The simulation
+            engine itself is a separate, ongoing piece of work; this page focuses on presenting it.
+        </p>
+    </div>
+</div>
+</body>
 </html>
